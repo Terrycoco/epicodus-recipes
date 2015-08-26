@@ -9,4 +9,16 @@ describe('the chef path') do
       expect(page).to have_content("Austin's wedding cake")
     end
   end
+
+  describe('recipe display page', {:type => :feature})  do
+    it('opens a page that displays the recipe as text') do
+      rec = Recipe.create({name: "Austin's Eggs"})
+      ingr = Ingredient.create({ingredient: "eggs"})
+      rec.ingredients.push(ingr)
+      ingr = Ingredient.create({ingredient: "bacon"})
+      rec.ingredients.push(ingr)
+      visit('/recipes/#{rec.id}')
+      expect(page).to have_content("bacon")
+    end
+  end
 end
