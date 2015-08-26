@@ -11,20 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826174534) do
+ActiveRecord::Schema.define(version: 20150826204625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "ingredients", force: :cascade do |t|
-    t.string "ingredient"
+    t.string   "ingredient"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ingredients_recipes", force: :cascade do |t|
-    t.integer "ingredient_id"
-    t.integer "recipe_id"
-    t.decimal "quantity",      precision: 10, scale: 2
-    t.string  "measurement"
+    t.integer  "ingredient_id"
+    t.integer  "recipe_id"
+    t.string   "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "measurement_lookup", id: false, force: :cascade do |t|
@@ -34,18 +37,24 @@ ActiveRecord::Schema.define(version: 20150826174534) do
   add_index "measurement_lookup", ["measurement"], name: "index_measurement_lookup_on_measurement", using: :btree
 
   create_table "recipes", force: :cascade do |t|
-    t.string  "name"
-    t.integer "yield"
-    t.string  "instr"
+    t.string   "name"
+    t.integer  "yield"
+    t.string   "instr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "recipes_tags", force: :cascade do |t|
-    t.integer "recipe_id"
-    t.integer "tag_id"
+    t.integer  "recipe_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "tag"
+    t.string   "tag"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "ingredients_recipes", "ingredients"
