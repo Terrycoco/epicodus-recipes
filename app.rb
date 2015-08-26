@@ -24,3 +24,30 @@ get '/recipes/:id' do
 
   erb :recipe
 end
+
+get '/recipes/:id/edit' do
+  id = params.fetch('id')
+  @recipe = Recipe.find(id)
+
+  erb :recipe_edit
+end
+
+post '/recipes/:id/update' do
+  recipe = Recipe.find(params.fetch('id'))
+  _yield = params.fetch('yield')
+  name = params.fetch('name')
+  instr = params.fetch('instr')
+  recipe.update(yield: _yield, name: name, instr: instr)
+  redirect("/recipes/#{recipe.id}")
+end
+
+post '/recipes/:id/add_ingr' do
+  recipe = Recipe.find(params.fetch('id'))
+  _yield = params.fetch('yield')
+  name = params.fetch('name')
+  instr = params.fetch('instr')
+  recipe.update(yield: _yield, name: name, instr: instr)
+  ingr = Ingredient.create(ingredient: params.fetch('ingredient'))
+  recipe.ingredients.push(ingr)
+  redirect("/recipes/#{recipe.id}")
+end

@@ -1,0 +1,25 @@
+<h1>Edit Recipe</h1>
+<form id="form_id" action="/recipes/<%= @recipe.id %>/update " method="post">
+  <label for="name">Recipe Name:</label>
+  <input type="text" name="name" value="<%= @recipe.name %>">
+  <label for="yield">Yields:</label>
+  <input type="text" name="yield" value="<%= @recipe.yield %>">
+
+<h3>Ingredients:</h3>
+<ul>
+  <% @recipe.ingredients.each do |i| %>
+  <li value="<%= i.id %>"><%= i.ingredient %></li>
+  <% end %>
+</ul>
+
+
+
+<input type="text" name="ingredient" value="">
+<button formaction="/recipes/<%= @recipe.id %>/add_ingr" name="button">+</button>
+
+<h3>Instructions:</h3>
+<textarea name="instr" rows="10" cols="40"><%= @recipe.instr %></textarea>
+
+<br>
+<button type="submit" name="save">Save</button>
+</form>

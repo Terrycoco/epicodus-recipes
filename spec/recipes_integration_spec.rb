@@ -21,4 +21,16 @@ describe('the chef path') do
       expect(page).to have_content("bacon")
     end
   end
+
+  describe('recipe form page', {:type => :feature})  do
+    it('opens a form for new recipe') do
+      rec = Recipe.create({name: "Austin's Eggs"})
+      ingr = Ingredient.create({ingredient: "eggs"})
+      rec.ingredients.push(ingr)
+      ingr = Ingredient.create({ingredient: "bacon"})
+      rec.ingredients.push(ingr)
+      visit("/recipes/#{rec.id}/edit")
+      expect(page).to have_content("bacon")
+    end
+  end
 end
