@@ -17,7 +17,7 @@ describe('the chef path') do
       rec.ingredients.push(ingr)
       ingr = Ingredient.create({ingredient: "bacon"})
       rec.ingredients.push(ingr)
-      visit('/recipes/#{rec.id}')
+      visit("/recipes/#{rec.id}")
       expect(page).to have_content("bacon")
     end
   end

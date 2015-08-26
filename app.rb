@@ -16,3 +16,11 @@ post '/recipes/new' do
 
   redirect '/'
 end
+
+get '/recipes/:id' do
+  id = params.fetch('id')
+  @recipe = Recipe.find(id)
+  @ingredients = @recipe.ingredients
+
+  erb :recipe
+end
