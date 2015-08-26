@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>MyRecipes.com</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='/main.css'>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>MyRecipes.com</h1>
+        <ul class="nav nav-pills">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/recipes">Recipes</a>
+          </li>
+          <li>
+            <a href="/ingredients">Ingredients</a>
+          </li>
+          <li>
+            <a href="/tags">Categories</a>
+          </li>
+        </ul>
+      <%= yield %>
+
+    </div>
+  </body>
+</html>

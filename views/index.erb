@@ -1,0 +1,34 @@
+<div class="row text-center">
+  <table class="table">
+    <tr id="first-row">
+      <th>
+        Recipe Name
+      </th>
+      <th>
+        <!-- placeholder do not delete this th -->
+      </th>
+    </tr>
+    <% @recipes.each do |r| %>
+      <tr>
+        <td>
+          <a href="<%= r.id %>">
+            <%= r.name %>
+          </a>
+        </td>
+        <td>
+          <!-- placeholder do not delete this td -->
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <form class="form" action="/recipes/new" method="post">
+        <td width="90%">
+          <input class="form-control" type="text" name="name" placeholder="Create a Recipe" required>
+        </td>
+        <td width="90%">
+          <button class="form-control" name="submit" type="submit">+</button>
+        </td>
+      </form>
+    </tr>
+  </table>
+</div>
