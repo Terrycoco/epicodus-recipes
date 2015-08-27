@@ -1,0 +1,30 @@
+<h2>Categories</h2>
+
+<table>
+  <tr id="first-row">
+    <th>
+      Category Name
+    </th>
+    <th>
+      <!-- placeholder -->
+    </th>
+  </tr>
+
+  <% @tags.each do |t| %>
+  <tr>
+    <td>
+      <%= t.tag %>
+    </td>
+    <td>
+      <form action="/tags/<%= t.id %>/delete" method="post">
+        <input name="_method" type="hidden" value="delete">
+        <button class="form-control" name="button" type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  <% end %>
+
+
+</table>
+
+<button name="tag"><a href="/tags">Back</a></button>

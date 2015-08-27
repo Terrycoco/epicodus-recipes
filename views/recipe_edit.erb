@@ -37,7 +37,9 @@
 
   <input type="submit" name="save" value="Save Tags">
 
-<br><br>
-  <button formaction="/recipes/<%= @recipe.id %>/tags/new"  type="submit" name="button">Create New Tag</button>
+</form>
+
+<form action="/recipes/<%= @recipe.id %>/tags/new" method="post">
   <input type="text" name="tag">
+  <button name="submit" type="submit">Save</button> 
 </form>

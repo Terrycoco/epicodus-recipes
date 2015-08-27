@@ -1,0 +1,30 @@
+<h2>Ingredients</h2>
+
+<table>
+  <tr id="first-row">
+    <th>
+      Ingredient Name
+    </th>
+    <th>
+      <!-- placeholder -->
+    </th>
+  </tr>
+
+  <% @ingredients.each do |i| %>
+  <tr>
+    <td>
+      <%= i.ingredient %>
+    </td>
+    <td>
+      <form action="/ingredients/<%= i.id %>/delete" method="post">
+        <input name="_method" type="hidden" value="delete">
+        <button class="form-control" name="button" type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  <% end %>
+
+
+</table>
+
+<button name="ingredients"><a href="/ingredients">Back</a></button>

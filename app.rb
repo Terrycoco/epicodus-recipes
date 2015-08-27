@@ -5,6 +5,16 @@ Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get '/' do
   @recipes = Recipe.all
+  @ingredients = Ingredient.all
+
+  erb :index
+end
+
+get '/recipes/ingredient' do
+  ingredient_id = params.fetch('ingredient_id')
+  ingredient = Ingredient.find(ingredient_id)
+  @recipes = ingredient.recipes
+  @ingredients = Ingredient.all
 
   erb :index
 end
@@ -40,7 +50,7 @@ post '/recipes/:id/update' do
   instr = params.fetch('instr')
   rating = params.fetch('rating').to_i
   recipe.update(yield: _yield, name: name, instr: instr, rating: rating)
-  redirect("/recipes/#{recipe.id}")
+  redirect("/recipes/#{recipe.id}/edit")
 end
 
 post '/recipes/:id/add_ingr' do
@@ -52,7 +62,7 @@ post '/recipes/:id/add_ingr' do
   recipe.update(yield: _yield, name: name, instr: instr, rating: rating)
   ingr = Ingredient.create(ingredient: params.fetch('ingredient'))
   recipe.ingredients.push(ingr)
-  redirect("/recipes/#{recipe.id}")
+  redirect("/recipes/#{recipe.id}/edit")
 end
 
 post '/recipes/:id/edit_tags' do
@@ -82,7 +92,7 @@ end
 
 get '/tags' do
   @tags = Tag.all
-  erb :tag
+  erb(:tag)
 end
 
 post "/recipe/:id/delete" do
@@ -90,4 +100,45 @@ post "/recipe/:id/delete" do
   recipe = Recipe.find(rid)
   Recipe.destroy(recipe)
   redirect '/'
+end
+
+get "/ingredient_filter" do
+  filter = params.fetch('filter').downcase
+  whereclause = "lower(ingredient) like '%" + filter + "%'"
+  @recipes = Recipe.joins(:ingredients).where(whereclause).distinct.order("Name ASC")
+  @ingredients = Ingredient.all
+  erb :index
+end
+
+get '/edit_tags' do
+  @tags = Tag.all
+
+  erb(:edit_tags)
+end
+
+delete '/tags/:id/delete' do
+  id = params.fetch('id')
+  tag = Tag.find(id)
+  Tag.destroy(tag)
+
+  redirect '/edit_tags'
+end
+
+get '/ingredients' do
+  @ingredients = Ingredient.all
+  erb(:ingredient)
+end
+
+get '/edit_ingredients' do
+  @ingredients = Ingredient.all
+
+  erb(:edit_ingredients)
+end
+
+delete '/ingredients/:id/delete' do
+  id = params.fetch('id')
+  ingredient = Ingredient.find(id)
+  Ingredient.destroy(ingredient)
+
+  redirect '/edit_ingredients'
 end

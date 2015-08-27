@@ -1,3 +1,23 @@
+<h3>Filter By Ingredient:</h3>
+<h4>Search by ingredient:</h4>
+<form id="form_id" action="/ingredient_filter" method="get">
+  <input type="text" name="filter">
+  <button name="button">Go</button>
+</form>
+
+<h4>Choose by ingredient:</h4>
+<form action="/recipes/ingredient" method="get">
+  <select name="ingredient_id">
+    <% @ingredients.each do |i| %>
+      <option value="<%= i.id %>"><%=i.ingredient %></option>
+    <% end %>
+  </select>
+  <button name="button">Go</button>
+</form>
+
+
+
+
 <div class="row text-center">
   <table class="table">
     <tr id="first-row">

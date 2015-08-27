@@ -1,0 +1,14 @@
+<h1>Recipe Ingredients</h1>
+<ul>
+  <% @ingredients.each do |i| %>
+  <li><h3><%= i.ingredient %></h3></li>
+  <ul>
+    <% i.recipes.each do |r| %>
+    <li><a href='/recipes/<%= r.id %>'><%= r.name %></a></li>
+    <% end %>
+  </ul>
+  <% end %>
+</ul>
+
+
+<a href="/edit_ingredients">Edit Ingredients</a>
