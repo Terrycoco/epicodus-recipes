@@ -28,6 +28,7 @@ end
 get '/recipes/:id/edit' do
   id = params.fetch('id')
   @recipe = Recipe.find(id)
+  @tags = Tag.all
 
   erb :recipe_edit
 end
@@ -50,4 +51,29 @@ post '/recipes/:id/add_ingr' do
   ingr = Ingredient.create(ingredient: params.fetch('ingredient'))
   recipe.ingredients.push(ingr)
   redirect("/recipes/#{recipe.id}")
+end
+
+post '/recipes/:id/edit_tags' do
+  id = params.fetch('id')
+  recipe = Recipe.find(id)
+
+  recipe.tags.delete_all
+
+  if params.include?('tag_id')
+    tag_id = params.fetch('tag_id')
+
+    tag_id.each do |i|
+      t = Tag.find(i)
+      recipe.tags.push(t)
+    end
+  end
+
+  redirect "/recipes/#{recipe.id}/edit"
+end
+
+post '/recipes/:id/tags/new' do
+  rid = params.fetch('id')
+  tag = params.fetch('tag')
+  Tag.create(tag: tag)
+  redirect("/recipes/#{rid}/edit")
 end

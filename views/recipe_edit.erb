@@ -23,3 +23,19 @@
 <br>
 <button type="submit" name="save">Save</button>
 </form>
+
+<form action="/recipes/<%= @recipe.id %>/edit_tags" method="post">
+  <% @tags.each do |t| %>
+    <input class="tag-box" type="checkbox" name="tag_id[]" value="<%= t.id %>" id="<%= t.id %>"
+      <% if @recipe.tags.include?(t) %>
+        checked
+      <% end %>
+    ><%= t.tag %>
+  <% end %>
+
+  <input type="submit" name="save" value="Save Tags">
+
+<br><br>
+  <button formaction="/recipes/<%= @recipe.id %>/tags/new"  type="submit" name="button">Create New Tag</button>
+  <input type="text" name="tag">
+</form>

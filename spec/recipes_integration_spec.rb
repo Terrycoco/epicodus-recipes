@@ -32,5 +32,26 @@ describe('the chef path') do
       visit("/recipes/#{rec.id}/edit")
       expect(page).to have_content("bacon")
     end
+
+    it('allows you to add tags to a recipe') do
+      rec = Recipe.create({name: "Austin's Eggs"})
+      ingr = Ingredient.create({ingredient: "eggs"})
+      rec.ingredients.push(ingr)
+      ingr = Ingredient.create({ingredient: "bacon"})
+      rec.ingredients.push(ingr)
+      tag1 = Tag.create({tag: "Chrismahannukwanzakuhtivus"})
+      tag2 = Tag.create({tag: "Breakfast"})
+      tag3 = Tag.create({tag: "Lunch"})
+      tag4 = Tag.create({tag: "Dinner"})
+      tag5 = Tag.create({tag: "Snacks"})
+      tag6 = Tag.create({tag: "Tacos"})
+      visit("recipes/#{rec.id}/edit")
+      page.check(tag1.id)
+      page.check(tag2.id)
+      page.check(tag3.id)
+      page.check(tag4.id)
+      click_button('Save Tags')
+      expect(rec.tags).to(eq([tag1, tag2, tag3, tag4]))
+    end
   end
 end
