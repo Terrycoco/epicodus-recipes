@@ -38,7 +38,8 @@ post '/recipes/:id/update' do
   _yield = params.fetch('yield')
   name = params.fetch('name')
   instr = params.fetch('instr')
-  recipe.update(yield: _yield, name: name, instr: instr)
+  rating = params.fetch('rating').to_i
+  recipe.update(yield: _yield, name: name, instr: instr, rating: rating)
   redirect("/recipes/#{recipe.id}")
 end
 
@@ -47,7 +48,8 @@ post '/recipes/:id/add_ingr' do
   _yield = params.fetch('yield')
   name = params.fetch('name')
   instr = params.fetch('instr')
-  recipe.update(yield: _yield, name: name, instr: instr)
+  rating = params.fetch('rating')
+  recipe.update(yield: _yield, name: name, instr: instr, rating: rating)
   ingr = Ingredient.create(ingredient: params.fetch('ingredient'))
   recipe.ingredients.push(ingr)
   redirect("/recipes/#{recipe.id}")
@@ -81,4 +83,11 @@ end
 get '/tags' do
   @tags = Tag.all
   erb :tag
+end
+
+post "/recipe/:id/delete" do
+  rid = params.fetch('id')
+  recipe = Recipe.find(rid)
+  Recipe.destroy(recipe)
+  redirect '/'
 end

@@ -1,5 +1,8 @@
 <h2><%= @recipe.name %></h2>
-<p>Yields:<%= @recipe.yield %></p>
+<p>
+  Rating: <%= @recipe.rating %>
+</p>
+<p>Yields: <%= @recipe.yield %></p>
 
 <h3>Ingredients:</h3>
 <ul>
@@ -21,3 +24,7 @@
 </ul>
 
 <button name="button"><a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a></button>
+
+<form id="form_id" action="index.html" method="post" class="delete-form">
+  <button type="submit" formaction="/recipe/<%= @recipe.id %>/delete" name="button">Delete Recipe</button>
+</form>

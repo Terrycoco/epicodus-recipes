@@ -5,7 +5,7 @@
         Recipe Name
       </th>
       <th>
-        <!-- placeholder do not delete this th -->
+        Rating
       </th>
     </tr>
     <% @recipes.each do |r| %>
@@ -16,7 +16,7 @@
           </a>
         </td>
         <td>
-          <!-- placeholder do not delete this td -->
+          <%= r.rating %>
         </td>
       </tr>
     <% end %>
