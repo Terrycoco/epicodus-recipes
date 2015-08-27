@@ -13,4 +13,11 @@
 <%= @recipe.instr %>
 </p>
 
+<h3>Categories:</h3>
+<ul>
+  <% @recipe.tags.each do |t| %>
+  <li><%= t.tag %></li>
+  <% end %>
+</ul>
+
 <button name="button"><a href="/recipes/<%= @recipe.id %>/edit">Edit Recipe</a></button>

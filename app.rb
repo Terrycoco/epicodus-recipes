@@ -77,3 +77,8 @@ post '/recipes/:id/tags/new' do
   Tag.create(tag: tag)
   redirect("/recipes/#{rid}/edit")
 end
+
+get '/tags' do
+  @tags = Tag.all
+  erb :tag
+end
